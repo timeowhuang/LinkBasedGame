@@ -104,7 +104,7 @@
       },
   
       "Basement_Door": {
-        "Body": "这是一扇通往地下室的门，上有数字密码锁，需要输入日期 (MMDDYY)。",
+        "Body": "这是一扇通往地下室的门，上有数字密码锁，需要输入6位数。",
         "Choices": [
           {"Text": "输入密码", "Target": "Basement", "NeedsPassword": true, "PasswordPrompt": "请输入6位数密码", "CorrectPassword": "071522"},
           {"Text": "返回主卧室", "Target": "Master_Room"}
@@ -147,8 +147,8 @@
           {
             "Text": "查看特别的书",
             "Target": "Library_Special_Book",
-            "AddItem": {"name": "图书馆线索", "description": "农场里饲养了若干只鸡、猫和兔，一共有 211 条腿。但是有一只猫只有三条腿，这 3 种动物各有多少只？"},
-            "AfterPickDescription": "农场里饲养了若干只鸡、猫和兔，一共有 211 条腿。但是有一只猫只有三条腿，这 3 种动物各有多少只？？"
+            "AddItem": {"name": "图书馆线索", "description": "农场里饲养了若干只鸡、猫和兔，猫兔数量一样，一共有 211 条腿。但是有一只猫只有三条腿，这 3 种动物各有多少只？"},
+            "AfterPickDescription": "农场里饲养了若干只鸡、猫和兔，一共有 211 条腿, 猫兔数量一样。但是有一只猫只有三条腿，这 3 种动物各有多少只？？"
           },
           {"Text": "返回走廊", "Target": "Hallway"}
         ]

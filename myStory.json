@@ -1,0 +1,243 @@
+{
+    "Title": "Escape from the Room",
+    "Credits": "Created by Eren Huang (thuan112@ucsc.edu).",
+    "InitialLocation": "Master_Room",
+    "Locations": {
+      "Master_Room": {
+        "Body": "你在一个宽敞的主卧室里。房间有一张床、一个小柜子和一张桌子。桌子上放着一个诡异的木偶娃娃。房间有三扇门：一扇带密码锁的地下室门，一扇通往浴室的滑动玻璃门，以及一扇通电后才能打开的金属门。",
+        "Choices": [
+          {"Text": "检查木偶娃娃", "Target": "Doll"},
+          {"Text": "查看带密码锁的地下室门", "Target": "Basement_Door"},
+          {"Text": "打开滑动玻璃门", "Target": "Bathroom"},
+          {"Text": "查看金属门", "Target": "Hallway_Door"}
+        ]
+      },
+  
+      "Doll": {
+        "Body": "这是一个诡异的木偶娃娃，坐在桌子上。它的眼睛似乎在盯着你看。",
+        "Choices": [
+          {"Text": "检查左手", "Target": "Doll_Left_Hand"},
+          {"Text": "检查右手", "Target": "Doll_Right_Hand"},
+          {"Text": "检查胸口", "Target": "Doll_Chest"},
+          {"Text": "检查脸部", "Target": "Doll_Face"},
+          {"Text": "返回主卧室", "Target": "Master_Room"}
+        ]
+      },
+  
+      "Doll_Left_Hand": {
+        "Body": "木偶左手上戴着一个生锈的戒指，被血迹污染。",
+        "Choices": [
+          {
+            "Text": "取下戒指",
+            "Target": "Doll_Left_Hand",
+            "AddItem": {"name": "染血的戒指", "description": "一个被血迹污染的戒指，看不清内部刻字。"},
+            "AfterPickDescription": "你取下了染血的戒指，似乎里面刻有日期，但因血迹无法辨认。"
+          },
+          {"Text": "继续检查木偶", "Target": "Doll", "RequiresItemNotExist": "染血的戒指"},
+          {"Text": "返回主卧室", "Target": "Master_Room"}
+        ]
+      },
+  
+      "Doll_Right_Hand": {
+        "Body": "木偶右手紧握着一张纸条。",
+        "Choices": [
+          {
+            "Text": "取出纸条",
+            "Target": "Doll_Right_Hand",
+            "AddItem": {"name": "神秘纸条", "description": "纸条上写着：'答案就在戒指中，但需要洗掉血迹才能看到。'"},
+            "AfterPickDescription": "你取出了纸条，上面写着：'答案就在戒指中，但需要洗掉血迹才能看到。'"
+          },
+          {"Text": "继续检查木偶", "Target": "Doll", "RequiresItemNotExist": "神秘纸条"},
+          {"Text": "返回主卧室", "Target": "Master_Room"}
+        ]
+      },
+  
+      "Doll_Face": {
+        "Body": "你仔细观察木偶的脸，发现右眼球松动。",
+        "Choices": [
+          {
+            "Text": "取出右眼球",
+            "Target": "Doll_Face",
+            "AddItem": {"name": "木偶右眼", "description": "一个玻璃制的眼球，形状奇特，像某种装置部件。"},
+            "AfterPickDescription": "你小心取出了木偶的右眼球。"
+          },
+          {"Text": "继续检查木偶", "Target": "Doll", "RequiresItemNotExist": "木偶右眼"},
+          {"Text": "返回主卧室", "Target": "Master_Room"}
+        ]
+      },
+  
+      "Doll_Chest": {
+        "Body": "木偶的胸口被绷带紧紧包裹，看起来藏有东西。你需要锋利工具才能切开。",
+        "Choices": [
+          {"Text": "用剪刀切开绷带", "Target": "Doll_Chest_Open", "RequiresItem": "厨房剪刀", "LockedDescription": "绷带太紧，需要锋利工具才能切开。"},
+          {"Text": "继续检查木偶", "Target": "Doll"},
+          {"Text": "返回主卧室", "Target": "Master_Room"}
+        ]
+      },
+  
+      "Doll_Chest_Open": {
+        "Body": "你用剪刀将绷带切开，露出一个心形小木盒。",
+        "Choices": [
+          {
+            "Text": "打开木盒",
+            "Target": "Doll_Box_Open",
+            "AddItem": {"name": "心形木盒", "description": "一个精致的心形木盒。"},
+            "AfterPickDescription": "你取出了木盒，似乎可以打开。"
+          },
+          {"Text": "继续检查木偶", "Target": "Doll"},
+          {"Text": "返回主卧室", "Target": "Master_Room"}
+        ]
+      },
+  
+      "Doll_Box_Open": {
+        "Body": "你打开木盒，里面有一把小钥匙。",
+        "Choices": [
+          {
+            "Text": "拿走钥匙",
+            "Target": "Doll_Box_Open",
+            "AddItem": {"name": "前门钥匙", "description": "一把小巧的金属钥匙，上刻 'EXIT'。"},
+            "AfterPickDescription": "你拿走了钥匙，能打开主要出口门。"
+          },
+          {"Text": "继续检查木偶", "Target": "Doll", "RequiresItemNotExist": "前门钥匙"},
+          {"Text": "返回主卧室", "Target": "Master_Room"}
+        ]
+      },
+  
+      "Basement_Door": {
+        "Body": "这是一扇通往地下室的门，上有数字密码锁，需要输入日期 (MMDDYY)。",
+        "Choices": [
+          {"Text": "输入密码", "Target": "Basement", "NeedsPassword": true, "PasswordPrompt": "请输入6位数密码 (格式: MMDDYY):", "CorrectPassword": "061597"},
+          {"Text": "返回主卧室", "Target": "Master_Room"}
+        ]
+      },
+  
+      "Basement": {
+        "Body": "你进入地下室，黑暗潮湿，墙上挂着一些工具，在角落有大型电源开关。",
+        "Choices": [
+          {"Text": "拉下电源开关", "Target": "Basement_Power", "AddItem": {"name": "电源已接通", "description": "你已接通房子电源。"}, "AfterPickDescription": "你拉下开关，听到电器运作声音，电力恢复！"},
+          {"Text": "返回主卧室", "Target": "Master_Room"}
+        ]
+      },
+  
+      "Basement_Power": {
+        "Body": "地下室灯亮了，你可以清楚看到一切。",
+        "Choices": [{"Text": "返回主卧室", "Target": "Master_Room"}]
+      },
+  
+      "Hallway_Door": {
+        "Body": "这是一扇通往走廊的金属门，锁上需要电源。",
+        "Choices": [
+          {"Text": "尝试开门", "Target": "Hallway", "RequiresItem": "电源已接通", "LockedDescription": "门未通电，无法打开。"},
+          {"Text": "返回主卧室", "Target": "Master_Room"}
+        ]
+      },
+  
+      "Hallway": {
+        "Body": "你走进长走廊，两侧有通往图书馆和客厅的门，客厅门似乎锁着。",
+        "Choices": [
+          {"Text": "进入图书馆", "Target": "Library"},
+          {"Text": "查看客厅门", "Target": "Living_Room_Door"},
+          {"Text": "返回主卧室", "Target": "Master_Room"}
+        ]
+      },
+  
+      "Library": {
+        "Body": "这是藏书丰富的图书馆，你注意到一本与众不同的书。",
+        "Choices": [
+          {
+            "Text": "查看特别的书",
+            "Target": "Library_Special_Book",
+            "AddItem": {"name": "图书馆线索", "description": "纸条上写着：'客厅的密码是4285'。"},
+            "AfterPickDescription": "你打开那本特别的书，发现纸条：'客厅的密码是4285'。"
+          },
+          {"Text": "返回走廊", "Target": "Hallway"}
+        ]
+      },
+  
+      "Library_Special_Book": {
+        "Body": "你找到那本隐藏纸条的书。",
+        "Choices": [
+          {"Text": "返回图书馆", "Target": "Library"},
+          {"Text": "返回走廊", "Target": "Hallway"}
+        ]
+      },
+  
+      "Living_Room_Door": {
+        "Body": "客厅门上有四位数密码锁。",
+        "Choices": [
+          {"Text": "输入密码", "Target": "Living_Room", "NeedsPassword": true, "PasswordPrompt": "请输入4位数密码:", "CorrectPassword": "4285"},
+          {"Text": "返回走廊", "Target": "Hallway"}
+        ]
+      },
+  
+      "Living_Room": {
+        "Body": "你进入客厅，有沙发、电视和通往厨房的门，还有一扇锁着的出口门。",
+        "Choices": [
+          {"Text": "进入厨房", "Target": "Kitchen"},
+          {"Text": "查看出口门", "Target": "Exit_Door"},
+          {"Text": "返回走廊", "Target": "Hallway"}
+        ]
+      },
+  
+      "Kitchen": {
+        "Body": "这是设备齐全的厨房，抽屉里有一把剪刀。",
+        "Choices": [
+          {"Text": "拿走剪刀", "Target": "Kitchen", "AddItem": {"name": "厨房剪刀", "description": "一把锋利的厨房剪刀。"}, "AfterPickDescription": "你拿走了剪刀，可以用来切割。"},
+          {"Text": "返回客厅", "Target": "Living_Room"}
+        ]
+      },
+  
+      "Bathroom": {
+        "Body": "你打开了浴室的滑动门，内有洗手台、镜子和淋浴间。",
+        "Choices": [
+          {"Text": "查看水龙头", "Target": "Bathroom_Faucet"},
+          {"Text": "返回主卧室", "Target": "Master_Room"}
+        ]
+      },
+  
+      "Bathroom_Faucet": {
+        "Body": "水龙头开关处有圆形凹槽，似乎缺少部件。",
+        "Choices": [
+          {"Text": "尝试安装木偶右眼", "Target": "Bathroom_Faucet_Fixed", "RequiresItem": "木偶右眼", "LockedDescription": "你需要合适部件来修复水龙头。"},
+          {"Text": "观察水龙头", "Target": "Bathroom_Faucet_Examine", "RequiresItemNotExist": "染血的戒指"},
+          {"Text": "返回浴室", "Target": "Bathroom"}
+        ]
+      },
+  
+      "Bathroom_Faucet_Fixed": {
+        "Body": "你将木偶右眼安装到凹槽中，水龙头可以正常使用。",
+        "Choices": [
+          {"Text": "清洗染血的戒指", "Target": "Bathroom_Ring_Clean", "RequiresItem": "染血的戒指", "ReplaceItem": "染血的戒指", "WithItem": {"name": "干净的戒指", "description": "一枚干净的戒指，内侧刻有日期：'061597'。"}, "LockedDescription": "水龙头可用后，什么都可清洗了。"},
+          {"Text": "观察水龙头", "Target": "Bathroom_Faucet_Fixed", "RequiresItemNotExist": "染血的戒指"},
+          {"Text": "返回浴室", "Target": "Bathroom"}
+        ]
+      },
+  
+      "Bathroom_Faucet_Examine": {
+        "Body": "水龙头已安装部件，可正常使用，目前无其他可清洗物品。",
+        "Choices": [{"Text": "返回浴室", "Target": "Bathroom"}]
+      },
+  
+      "Bathroom_Ring_Clean": {
+        "Body": "你用水彻底清洗了戒指，洗掉血迹，戒指内侧现出日期：'061597'，像极了密码。",
+        "Choices": [
+          {"Text": "返回浴室", "Target": "Bathroom"},
+          {"Text": "返回主卧室", "Target": "Master_Room"}
+        ]
+      },
+  
+      "Exit_Door": {
+        "Body": "这是一扇出口门，上有钥匙孔。",
+        "Choices": [
+          {"Text": "使用钥匙", "Target": "Beyond", "RequiresItem": "前门钥匙", "LockedDescription": "门锁，需要正确钥匙才能打开。"},
+          {"Text": "返回客厅", "Target": "Living_Room"}
+        ]
+      },
+  
+      "Beyond": {
+        "Body": "恭喜你！你成功逃出房子，置身于阳光草地，获得自由。",
+        "Choices": [{"Text": "游戏结束", "Target": "End"}]
+      }
+    }
+  }
+  

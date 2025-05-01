@@ -8,10 +8,10 @@ class Engine {
         this.firstSceneClass = firstSceneClass;
         this.storyDataUrl = storyDataUrl;
         
-        // 初始化物品栏
+        //Initialize inventory
         this.inventory = [];
 
-        // 获取容器
+        //Get containers
         this.gameContainer = document.getElementById('game-container');
         if (!this.gameContainer) {
             this.gameContainer = document.body;
@@ -22,7 +22,7 @@ class Engine {
         this.output.id = "output";
         this.actionsContainer = this.gameContainer.appendChild(document.createElement("div"));
 
-        // 初始化物品栏显示
+        //Initialize inventory displayment
         this.inventoryItems = document.getElementById('inventory-items');
 
         fetch(storyDataUrl).then(
@@ -62,21 +62,21 @@ class Engine {
         this.output.appendChild(div);
     }
 
-    // 添加物品栏方法
+    //Update the inventory UI
     updateInventory() {
         if (!this.inventoryItems) return;
         
-        // 清空当前物品栏
+        //Clear current inventory items when empty
         this.inventoryItems.innerHTML = '';
         
         if(this.inventory.length === 0) {
-            // 如果物品栏为空，显示提示
+            //pampt hint if inventory is empty
             let emptyText = document.createElement('p');
             emptyText.id = 'empty-inventory';
             emptyText.textContent = '物品栏为空';
             this.inventoryItems.appendChild(emptyText);
         } else {
-            // 显示所有物品
+            //Shows all item
             for(let item of this.inventory) {
                 let itemDiv = document.createElement('div');
                 itemDiv.className = 'inventory-item';
@@ -86,7 +86,7 @@ class Engine {
         }
     }
     
-    // 添加物品到物品栏
+    //add item when items picked up
     addItem(item) {
         if(!this.hasItem(item.name)) {
             this.inventory.push(item);
@@ -96,13 +96,13 @@ class Engine {
         return false;
     }
     
-    // 从物品栏移除物品
+    //Remove item  
     removeItem(itemName) {
         this.inventory = this.inventory.filter(item => item.name !== itemName);
         this.updateInventory();
     }
     
-    // 检查物品栏中是否有特定物品
+    //Check if the inventory contains a specific item
     hasItem(itemName) {
         return this.inventory.some(item => item.name === itemName);
     }
